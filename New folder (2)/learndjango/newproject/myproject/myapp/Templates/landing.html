@@ -1,0 +1,211 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>landing</title>
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+{% block content %}
+
+
+<section style="position: relative; background-color: #e6eef7; height: 450px; display: flex; align-items: center; overflow: hidden;">
+        <div style="padding-left: 10%; z-index: 2; width: 40%;">
+            <h1 style="font-size: 36px; font-weight: 600; margin-bottom: 10px;">Meet Surface Laptop</h1>
+            <p style="font-size: 16px; margin-bottom: 25px; line-height: 1.5;">
+                Unlock AI features like Live Captions and Cocreator with this exceptionally powerful laptop.
+            </p>
+            <a href="#" style="background-color: #0067b8; color: white; padding: 10px 25px; text-decoration: none; font-weight: 600; font-size: 15px; border-radius: 2px;">
+                Learn more
+            </a>
+        </div>
+
+        <div style="position: absolute; right: 5%; top: 50%; transform: translateY(-50%); width: 50%;">
+            <img src="{% static 'img/Highlight-Surface-Laptop-AI-7Ed-Sapphire-MC001-3000x1682_VP5-1920x600.avif' %}" alt="Surface Laptop" style="width: 100%; height: auto;">
+        </div>
+    </section>
+
+    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; padding: 20px 0;">
+        <span style="cursor: pointer;">⏸</span>
+        <span style="cursor: pointer;">❮</span>
+        <span style="width: 8px; height: 8px; border: 1px solid #000; border-radius: 50%;"></span>
+        <span style="width: 8px; height: 8px; background: #000; border-radius: 50%;"></span>
+        <span style="cursor: pointer; border: 1px dashed #000; padding: 2px 5px;">❯</span>
+    </div>
+
+    <section style="display: flex; justify-content: center; gap: 60px; padding: 40px 0; background-color: #fff;">
+        
+        <div style="text-align: center; cursor: pointer;">
+            <div style="margin-bottom: 10px; font-size: 32px;">🪟</div> <a href="#" style="color: #0067b8; text-decoration: underline; font-weight: 500; font-size: 14px;">Choose your Microsoft 365</a>
+        </div>
+
+        <div style="text-align: center; cursor: pointer;">
+            <div style="margin-bottom: 10px; font-size: 32px;">🎮</div> <a href="#" style="color: #0067b8; text-decoration: underline; font-weight: 500; font-size: 14px;">Shop Xbox</a>
+        </div>
+
+        <div style="text-align: center; cursor: pointer;">
+            <div style="margin-bottom: 10px; font-size: 32px;">🪟</div> <a href="#" style="color: #0067b8; text-decoration: underline; font-weight: 500; font-size: 14px;">Get Windows 11</a>
+        </div>
+
+        <div style="text-align: center; cursor: pointer;">
+            <div style="margin-bottom: 10px; font-size: 32px;">💻</div> <a href="#" style="color: #0067b8; text-decoration: underline; font-weight: 500; font-size: 14px;">Explore Surface devices</a>
+        </div>
+
+    </section>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1200px; margin: 0 auto;">
+
+        <div style="background-color: white; width: 280px; display: flex; flex-direction: column; border: 1px solid #e6e6e6; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <img src={% static 'img/la.avif' %} alt="Surface Pro" style="width: 100%; height: auto;">
+            <div style="padding: 20px; flex-grow: 1;">
+                <h2 style="font-size: 20px; margin: 0 0 10px 0; color: #000;">Surface Pro, Copilot+ PC</h2>
+                <p style="font-size: 14px; color: #333; line-height: 1.5;">This laptop's unrivalled flexibility and AI features like Cocreator, enable you to do more than you ever imagined.</p>
+            </div>
+            <div style="padding: 0 20px 20px 20px;">
+                <button style="background-color: #0067b8; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 14px;">Learn more</button>
+            </div>
+        </div>
+
+        <div style="background-color: white; width: 280px; display: flex; flex-direction: column; border: 1px solid #e6e6e6; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <img src={% static 'img/g.webp' %} alt="Xbox Series S" style="width: 100%; height: auto;">
+            <div style="padding: 20px; flex-grow: 1;">
+                <h2 style="font-size: 20px; margin: 0 0 10px 0; color: #000;">Xbox Series S</h2>
+                <p style="font-size: 14px; color: #333; line-height: 1.5;">Next-gen performance in the smallest Xbox ever.</p>
+            </div>
+            <div style="padding: 0 20px 20px 20px;">
+                <button style="background-color: #0067b8; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 14px;">Shop Xbox Series S</button>
+            </div>
+        </div>
+
+        <div style="background-color: white; width: 280px; display: flex; flex-direction: column; border: 1px solid #e6e6e6; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <img src={% static 'img/ga.avif' %} alt="Xbox Series X" style="width: 100%; height: auto;">
+            <div style="padding: 20px; flex-grow: 1;">
+                <h2 style="font-size: 20px; margin: 0 0 10px 0; color: #000;">Xbox Series X</h2>
+                <p style="font-size: 14px; color: #333; line-height: 1.5;">The fastest, most powerful Xbox ever.</p>
+            </div>
+            <div style="padding: 0 20px 20px 20px;">
+                <button style="background-color: #0067b8; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 14px;">Shop Xbox Series X</button>
+            </div>
+        </div>
+
+        <div style="background-color: white; width: 280px; display: flex; flex-direction: column; border: 1px solid #e6e6e6; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <img src={% static 'img/x.avif' %} alt="Xbox Game Pass" style="width: 100%; height: auto;">
+            <div style="padding: 20px; flex-grow: 1;">
+                <h2 style="font-size: 20px; margin: 0 0 10px 0; color: #000;">Xbox Game Pass Ultimate</h2>
+                <p style="font-size: 14px; color: #333; line-height: 1.5;">Play new titles on day one. Enjoy hundreds of high-quality games with friends on console, PC or cloud.</p>
+            </div>
+            <div style="padding: 0 20px 20px 20px;">
+                <button style="background-color: #0067b8; color: white; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; font-size: 14px;">Join now</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+    <div style="background-color: #404040; color: white; display: flex; align-items: center; justify-content: center; padding: 60px 10%; font-family: 'Segoe UI', Arial, sans-serif; min-height: 400px; overflow: hidden;">
+    
+    <div style="flex: 1; padding-right: 40px; max-width: 500px;">
+        <h1 style="font-size: 42px; font-weight: 600; margin-bottom: 20px; line-height: 1.2;">
+            Designed for life today – <br> and tomorrow
+        </h1>
+        <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+            The next-generation of games. Your goals. Friends and family. Windows 11 was made to bring you closer to everything you love.
+        </p>
+        <button style="background-color: #0067b8; color: white; border: none; padding: 12px 24px; font-size: 16px; font-weight: 600; cursor: pointer;">
+            See if your PC is ready
+        </button>
+    </div>
+
+    <div style="flex: 1; display: flex; justify-content: flex-end; position: relative;">
+        <img src={% static 'img/ye.avif' %} alt="Windows 11 Laptop" style="max-width: 120%; height: auto; box-shadow: -20px 20px 50px rgba(0,0,0,0.3);">
+    </div>
+
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<div style="padding: 50px 5%;">
+        <h2 style="font-size: 28px; margin-bottom: 30px;">For business</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: start;">
+            
+            <div style="width: 280px; border: 1px solid #e6e6e6; display: flex; flex-direction: column; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <img src={% static 'img/cyr.avif' %} style="width: 100%;">
+                <div style="padding: 15px; flex-grow: 1;">
+                    <span style="background: #ffb900; padding: 2px 8px; font-size: 12px; font-weight: bold;">New</span>
+                    <h3 style="font-size: 20px; margin: 10px 0;">Surface Pro for Business, Copilot+ PC | Intel</h3>
+                    <p style="font-size: 14px; color: #505050;">Ultra-versatile and built with Intel Core Ultra processors.</p>
+                </div>
+                <div style="padding: 15px;">
+                    <button style="background: #0067b8; color: white; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold;">Learn more</button>
+                </div>
+            </div>
+
+            <div style="width: 280px; border: 1px solid #e6e6e6; display: flex; flex-direction: column;">
+                <img src={% static 'img/cr2.avif' %} style="width: 100%;">
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="font-size: 20px; margin: 10px 0;">Microsoft 365 Copilot</h3>
+                    <p style="font-size: 14px; color: #505050;">Save time and focus on the things that matter most with AI.</p>
+                </div>
+                <div style="padding: 15px;">
+                    <button style="background: #0067b8; color: white; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold;">Learn more</button>
+                </div>
+            </div>
+
+            <div style="width: 280px; border: 1px solid #e6e6e6; display: flex; flex-direction: column;">
+                <img src={% static 'img/cr3.avif' %} style="width: 100%;">
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="font-size: 20px; margin: 10px 0;">Get Microsoft Teams for your business</h3>
+                    <p style="font-size: 14px; color: #505050;">Online meetings, chat, and shared cloud storage – all in one place.</p>
+                </div>
+                <div style="padding: 15px;">
+                    <button style="background: #0067b8; color: white; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold;">Find the right plan</button>
+                </div>
+            </div>
+
+            <div style="width: 280px; border: 1px solid #e6e6e6; display: flex; flex-direction: column;">
+                <img src={% static 'img/big.avif' %} style="width: 100%;">
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="font-size: 20px; margin: 10px 0;">Windows 11 for business</h3>
+                    <p style="font-size: 14px; color: #505050;">Designed for hybrid work. Powerful for employees. Consistent for IT.</p>
+                </div>
+                <div style="padding: 15px;">
+                    <button style="background: #0067b8; color: white; border: none; padding: 8px 16px; cursor: pointer; font-weight: bold;">Learn more</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; padding: 20px 5%;">
+        <button style="background: #e6e6e6; border: none; padding: 10px 15px; cursor: pointer; font-size: 14px;">↑ Back to top</button>
+    </div>
+
+{% endblock content %}

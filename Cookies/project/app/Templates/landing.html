@@ -1,0 +1,22 @@
+
+{% load static %}
+
+{% block content %}
+
+<form action="{% url 'set' %}">
+
+    <button type="submit"> Set_Cookies </button>
+</form> <br> 
+
+<button type="submit"> 
+     <a href="{% url 'get' %}"> Get_Cookies </a>
+</button> <br>  <br>
+
+  <a href="{% url 'delete'  %}"> <button type="button"> Delete_Cookies </button> </a>
+
+{% endblock content %}
+
+
+
+
+

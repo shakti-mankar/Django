@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Landing Page</title>
+</head>
+<body>
+
+<h2>Session Operations</h2>
+
+<!-- SET COOKIE -->
+<form action="{% url 'set' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Set Cookies</button>
+</form>
+
+<br>
+
+<!-- GET COOKIE -->
+<a href="{% url 'get' %}">
+    <button type="button">Get Cookies</button>
+</a>
+
+<br><br>
+
+<!-- DELETE COOKIE -->
+<a href="{% url 'delete' %}">
+    <button type="button">Delete Cookies</button>
+</a>
+
+</body>
+</html>

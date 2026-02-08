@@ -1,0 +1,1027 @@
+{% extends "Base.html" %}
+
+{% block title %}<title>Admin Dashboard</title>{% endblock title %}
+
+{% block css %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<style>
+    :root {
+        --sidebar-bg: #111827;
+        --action-panel-bg: #ffffff;
+        --main-bg: #f8fafc;
+        --accent: #4f46e5;
+        --text-dark: #1e293b;
+        --danger: #ef4444;
+        --success: #10b981;
+    }
+
+    body {
+        background-color: var(--main-bg);
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+    }
+
+    .dashboard-container {
+        display: flex;
+        height: 100vh;
+    }
+
+    /* 1. SLIM SIDEBAR (Leftmost) */
+    .nav-sidebar {
+        width: 80px;
+        background: var(--sidebar-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 25px;
+    }
+
+    .nav-icon {
+        color: #94a3b8;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+
+    .nav-icon:hover,
+    .nav-icon.active {
+        color: white;
+    }
+
+    /* 2. QUICK ACTIONS PANEL (Side Menu) */
+    .action-panel {
+        width: 280px;
+        background: var(--action-panel-bg);
+        border-right: 1px solid #e2e8f0;
+        padding: 25px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panel-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+    }
+
+    .action-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 18px;
+        background: #f1f5f9;
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 600;
+        transition: all 0.2s;
+        margin-bottom: 10px;
+    }
+
+    .action-item:hover {
+        background: #fff;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        transform: translateX(5px);
+    }
+
+    .action-item span {
+        margin-right: 12px;
+        font-size: 20px;
+    }
+
+    .logout-box {
+        background: #fef2f2;
+        color: var(--danger);
+        border: 1px solid #fee2e2;
+        margin-top: 10px;
+    }
+
+    .logout-box:hover {
+        background: var(--danger);
+        color: white;
+    }
+
+    /* 3. MAIN CONTENT AREA */
+    .main-content {
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+    }
+
+    /* Info Cards Style */
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .info-card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .info-data h1 {
+        font-size: 42px;
+        color: var(--text-dark);
+        margin-top: 5px;
+    }
+
+    .info-data p {
+        color: #64748b;
+        font-weight: 500;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .info-icon-large {
+        width: 70px;
+        height: 70px;
+        background: #eef2ff;
+        color: var(--accent);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-icon-large span {
+        font-size: 35px;
+    }
+
+    /* Table & List Styling */
+    .content-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .content-table th {
+        background: #f8fafc;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    /* Form Styling */
+    .form-card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        max-width: 800px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #475569;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    /* Buttons */
+    .btn-delete {
+        background: #fee2e2;
+        color: var(--danger);
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+        background: var(--danger);
+        color: white;
+    }
+
+    .status-paid {
+        color: var(--success);
+        font-weight: bold;
+    }
+
+    .status-pending {
+        color: #f59e0b;
+        font-weight: bold;
+    }
+
+
+    .message-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 350px;
+}
+
+.custom-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    animation: slideIn 0.4s ease;
+}
+
+/* Icons */
+.alert-icon {
+    font-size: 20px;
+}
+
+/* Text */
+.alert-text {
+    flex: 1;
+}
+
+/* Success */
+.alert-success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    border: none;
+}
+
+/* Error */
+.alert-error,
+.alert-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    border: none;
+}
+
+/* Warning */
+.alert-warning {
+    background: linear-gradient(135deg, #facc15, #eab308);
+    color: #000;
+    border: none;
+}
+
+/* Info */
+.alert-info {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #fff;
+    border: none;
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="nav-sidebar">
+        <a href={% url 'add_anlytics' %} class="nav-icon"><span class="material-icons-outlined">analytics</span></a>
+        <a href={% url 'add_setting' %} class="nav-icon"><span class="material-icons-outlined">settings</span></a>
+    </div>
+
+    <div class="action-panel">
+        <h4 class="panel-title">Management</h4>
+        <a href={% url 'add_employees' %} class="action-item"><span class="material-icons-outlined">domain</span> Add
+            employees</a>
+        <a href={% url 'all_employees' %} class="action-item"><span class="material-icons-outlined">groups</span> All
+            Employees</a>
+        <a href={% url 'remove_employees' %} class="action-item" style="color: var(--danger);"><span
+                class="material-icons-outlined">person_remove</span> Remove Employee</a>
+ 
+   <a href={% url 'remove_department' %} class="action-item" style="color: var(--danger);"><span
+                class="material-icons-outlined">person_remove</span> Remove department</a>
+ 
+
+
+
+            <a href={% url 'add_department' %} class="action-item"><span class="material-icons-outlined">domain</span> Add
+            Department</a>
+        <a href={% url 'all_department' %} class="action-item"><span class="material-icons-outlined">account_tree</span>
+            All Departments</a>
+        <a href={% url 'all_quries' %} class="action-item"><span class="material-icons-outlined">account_tree</span> All
+            qruies</a>
+        <a href={% url 'logout' %} class="action-item logout-box">
+            <span class="material-icons-outlined">logout</span> Logout
+        </a>
+
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+
+        <h4 class="panel-title">Reports</h4>
+        <a href={% url 'payroll' %} class="action-item"><span class="material-icons-outlined">payments</span> Payroll</a>
+    </div>
+
+    <main class="main-content">
+ <a href="{% url 'admindpanel' %}" class="back-btn">
+    ← Back to Dashboard
+</a>
+
+        {% if add_anlytics %}
+        <div class="form-card" style="max-width: 100%;">
+            <h2>Organization Analytics</h2>
+            <div
+                style="background: #f1f5f9; height: 300px; border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 2px dashed #cbd5e1;">
+                <div style="text-align: center; color: #64748b;">
+                    <span class="material-icons-outlined" style="font-size: 48px;">bar_chart</span>
+                    <p>Growth and Attendance Charts will appear here.</p>
+                </div>
+            </div>
+        </div>
+        {% elif add_setting %}
+        <div class="form-card">
+            <h2>Admin Settings</h2>
+            <form action="#" method="POST">
+                <div class="form-group"><label>Admin Username</label><input type="text" value="Admin_User"></div>
+                <div class="form-group"><label>Contact Email</label><input type="email" value="{{ data.email }}"></div>
+                <div class="form-group"><label>New Password</label><input type="password"
+                        placeholder="Leave blank to keep current"></div>
+                <button type="submit"
+                    style="background: var(--accent); color: white; border: none; padding: 15px 40px; border-radius: 10px; cursor: pointer; font-weight: bold;">Update
+                    Profile</button>
+            </form>
+        </div>
+
+        {% elif add_employees %}
+        <div class="form-card">
+            <h2 style="margin-top: 0; margin-bottom: 30px;">Register New Employee</h2>
+                  {% if messages %}
+  <div class="message-wrapper">
+    {% for i in messages %}
+      <div class="alert alert-{{ i.tags }} alert-dismissible fade show custom-alert"
+           role="alert">
+        <span class="alert-icon">
+          {% if i.tags == 'success' %}
+            ✔
+          {% elif i.tags == 'error' %}
+            ✖
+          {% elif i.tags == 'warning' %}
+            ⚠
+          {% else %}
+            ℹ
+          {% endif %}
+        </span>
+
+        <span class="alert-text">{{ i }}</span>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+            <form action="addemp" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-family: sans-serif; background: #fff; padding: 20px; border-radius: 8px;">
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">First
+                            Name</label><input type="text" name="fname" placeholder="John" required
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">Last
+                            Name</label><input type="text" name="lname" placeholder="Doe" required
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">Email
+                            Address</label><input type="email" name="email" placeholder="john@company.com" required
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">upload
+                            Image</label><input type="file" accept="image/*" name="img" required
+                            style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; background:#f9f9f9;">
+                    </div>
+                      <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">upload
+                            ADHAAR</label><input type="file" accept="image/*" name="adhaar" required
+                            style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px; background:#f9f9f9;">
+                    </div>
+
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">Employee
+                            ID</label><input type="text" name="code" placeholder="EMP-101"
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;">Mobile
+                            Number</label><input type="number" name="mobile" placeholder="9876543210"
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+                    
+                    <div class="form-group"><label style="display:block; margin-bottom:5px; font-weight:600;"> 
+                            DOB</label><input type="date" name="DOB" placeholder="9876543210"
+                            style="width:100%; padding:10px; border:1px solid #ccc; border-radius:4px;"></div>
+
+                    <div style="grid-column: span 2;">
+                        <label style="display:block; margin-bottom:10px; font-weight:600;">Gender</label>
+                        <div style="display: flex; gap: 15px;">
+                            <label
+                                style="padding: 10px 20px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px; background: #fafafa;">
+                                <input type="radio" name="gender" value="male" style="accent-color: #007bff;"> Male
+                            </label>
+                            <label
+                                style="padding: 10px 20px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px; background: #fafafa;">
+                                <input type="radio" name="gender" value="female" style="accent-color: #007bff;"> Female
+                            </label>
+                            <label
+                                style="padding: 10px 20px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 8px; background: #fafafa;">
+                                <input type="radio" name="gender" value="others" style="accent-color: #007bff;"> Other
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="grid-column: span 2;">
+                        <label style="display:block; margin-bottom:10px; font-weight:600;">Education
+                            Qualification</label>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; background: #f4f7f6; padding: 15px; border-radius: 8px;">
+                            <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" name="edu" value="matric"
+                                    style="width:18px; height:18px; accent-color: #28a745;"> Matric / O-Level
+                            </label>
+                            <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" name="edu" value="inter"
+                                    style="width:18px; height:18px; accent-color: #28a745;"> Intermediate / A-Level
+                            </label>
+                            <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" name="edu" value="grad"
+                                    style="width:18px; height:18px; accent-color: #28a745;"> Graduate
+                            </label>
+                            <label style="cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" name="edu" value="postgrad"
+                                    style="width:18px; height:18px; accent-color: #28a745;"> Post-Graduate
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group"><label>Department</label>
+                    <select name="dept">
+                    {% if deptdata %}
+                    
+                  
+                    {% for i in deptdata %}
+                         
+                        <option value={{i.dept_name}}>{{i.dept_name}}</option>
+                        
+
+                         
+                    {% endfor %}
+                      {% else %}
+                        <option value="notselected"> no department</option>
+
+                    {% endif %}
+
+                    </select>
+                </div>
+                       <button type="submit"
+            style="background: var(--accent); color: white; border: none; padding: 15px 40px; border-radius: 10px; cursor: pointer; font-weight: bold;">Save
+            Employee</button>
+        </div>
+ 
+        </form>
+</div>
+
+{% elif all_employees %}
+<div class="form-card" style="max-width: 100%;">
+    <h2>All Employees</h2>
+    {% if all_emp %}
+    
+
+    <table class="content-table">
+    
+        <thead>
+            <tr>
+             <th>S.no</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>code</th>
+                <th>mobile</th>
+
+            </tr>
+        </thead>
+        <tbody>
+         
+            
+            {% for i in  all_emp %}
+
+              <tr>
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.fname}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.dept}}</td>
+                    <td>{{i.code}}</td>
+                    <td>{{i.mobile}}</td>
+
+
+            {% endfor%}
+            </tr>
+        </tbody>
+    </table>
+        {% else %}
+     <h1>   no  employees </h1>
+    {% endif %}
+</div>
+
+ 
+{% elif remove_employees %}
+<div class="form-card" style="max-width: 100%;">
+ {% if messages %}
+  <div class="message-wrapper">
+    {% for i in messages %}
+      <div class="alert alert-{{ i.tags }} alert-dismissible fade show custom-alert"
+           role="alert">
+        <span class="alert-icon">
+          {% if i.tags == 'success' %}
+            ✔
+          {% elif i.tags == 'error' %}
+            ✖
+          {% elif i.tags == 'warning' %}
+            ⚠
+          {% else %}
+            ℹ
+          {% endif %}
+        </span>
+
+        <span class="alert-text">{{ i }}</span>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+    <h2 style="color: var(--danger);">remove employess</h2>
+    {% if empl %}
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Name</th>
+                <th>email</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+         <tbody>
+         
+            
+            {% for i in  empl %}
+
+              <tr>
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.fname}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.dept}}</td>
+                <td><button class="btn-delete"><a style="text-decoration: none;" href={% url 'removeemp' pk=i.id %}>delete</a></button></td>
+            {% endfor%}
+            </tr>
+        </tbody>
+    </table>
+        {% else %}
+     <h1>   no  employees </h1>
+    {% endif %}
+</div>
+
+
+
+{% elif remove_department %}
+<div class="form-card" style="max-width: 100%;">
+ {% if messages %}
+  <div class="message-wrapper">
+    {% for i in messages %}
+      <div class="alert alert-{{ i.tags }} alert-dismissible fade show custom-alert"
+           role="alert">
+        <span class="alert-icon">
+          {% if i.tags == 'success' %}
+            ✔
+          {% elif i.tags == 'error' %}
+            ✖
+          {% elif i.tags == 'warning' %}
+            ⚠
+          {% else %}
+            ℹ
+          {% endif %}
+        </span>
+
+        <span class="alert-text">{{ i }}</span>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+    <h2 style="color: var(--danger);">delete department</h2>
+    {% if deptdata %}
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Name</th>
+                <th>Department_head</th>
+                <th>Department_code</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+         <tbody>
+         
+            
+            {% for i in  deptdata %}
+
+              <tr>
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.dept_name}}</td>
+                    <td>{{i.dept_head}}</td>
+                    <td>{{i.dept_code}}</td>
+                <td><button class="btn-delete"><a style="text-decoration: none;" href={% url 'removedept' pk=i.id %}>delete</a></button></td>
+            {% endfor%}
+            </tr>
+        </tbody>
+    </table>
+        {% else %}
+     <h1>   no  employees </h1>
+    {% endif %}
+</div>
+
+
+{% elif payroll %}
+<div class="form-card" style="max-width: 100%;">
+    <h2>Payroll Management</h2>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Base Salary</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rajesh Kumar</td>
+                <td>$4,500</td>
+                <td><span class="status-paid">Paid</span></td>
+                <td><button style="border: 1px solid #ddd; padding: 5px 10px; border-radius: 5px;">Slip</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% elif  add_department %}
+
+ <form action="save_department" method="POST" style="max-width: 800px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+    {% csrf_token %}
+    <h2 style="margin-bottom: 20px; color: #333; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Add New Department</h2>
+        {% if messages %}
+  <div class="message-wrapper">
+    {% for i in messages %}
+      <div class="alert alert-{{ i.tags }} alert-dismissible fade show custom-alert"
+           role="alert">
+        <span class="alert-icon">
+          {% if i.tags == 'success' %}
+            ✔
+          {% elif i.tags == 'error' %}
+            ✖
+          {% elif i.tags == 'warning' %}
+            ⚠
+          {% else %}
+            ℹ
+          {% endif %}
+        </span>
+
+        <span class="alert-text">{{ i }}</span>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        
+        <div class="form-group">
+            <label style="display:block; margin-bottom:5px; font-weight:600; color: #555;">Department Name</label>
+            <input type="text" name="dept_name" placeholder="e.g. Sales, IT, HR" required 
+                   style="width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing: border-box; outline: none; transition: border 0.3s;">
+        </div>
+
+        <div class="form-group">
+            <label style="display:block; margin-bottom:5px; font-weight:600; color: #555;">Dept. Short Code</label>
+            <input type="text" name="dept_code" placeholder="e.g. IT-01" 
+                   style="width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing: border-box;">
+        </div>
+
+        <div class="form-group">
+            <label style="display:block; margin-bottom:5px; font-weight:600; color: #555;">Department Head (HOD)</label>
+            <select name="dept_head" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; background: white; cursor: pointer;">
+                <option value="">Select Manager</option>
+                <option value="jatin">jatin</option>
+                <option value="manish">manish</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label style="display:block; margin-bottom:5px; font-weight:600; color: #555;">Annual Budget ($)</label>
+            <input type="number" name="dept_budget" placeholder="Enter Amount" 
+                   style="width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing: border-box;">
+        </div>
+
+        <div style="grid-column: span 2;">
+            <label style="display:block; margin-bottom:5px; font-weight:600; color: #555;">Description</label>
+            <textarea name="dept_desc" placeholder="Briefly describe department roles..." rows="3"
+                      style="width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; resize: vertical; box-sizing: border-box;"></textarea>
+        </div>
+
+      
+
+        <div style="grid-column: span 2; text-align: right; margin-top: 10px;">
+            <button type="submit"
+                style="background: #4A90E2; color: white; border: none; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 6px rgba(74, 144, 226, 0.2);">
+                Save Department
+            </button>
+        </div>
+    </div>
+</form>
+{% elif all_department %}
+<div class="form-card" style="max-width: 100%;">
+
+    <h2>All Departments</h2>
+
+    {% if deptdata %}
+    
+ 
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>s no</th>
+                <th>Dept Name</th>
+                <th>HOD</th>
+                <th>Total Staff</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for i in deptdata %}
+
+             
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.dept_name}}</td>
+                    <td>{{i.dept_head}}</td>
+                    <td>{{i.dept_code}}</td>
+
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+       {% else %}
+       <h1>
+    no department
+       </h1>
+    {% endif %}
+</div>
+
+{% elif  all_quries %}
+<div class="form-card" style="max-width: 100%;">
+    <h2>All Quries</h2>
+    {% if qdata %}
+    
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>employee Name</th>
+                <th>department</th>
+                <th>query</th>
+                <th>email</th>
+                <th>status</th>
+                <th>admin reply</th>
+                
+
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+            {% for i in qdata %}
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.Query}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.status}}</td>
+                    {% if i.admin_rep %}
+                    <td>{{i.admin_rep}}</td>
+                    {% else %}
+                    <td><button><a style="text-decoration: none;" href={% url 'a_reply' pk=i.id %}>admin reply</a></button></td>
+                    {% endif %}
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+       {% else %}
+       <h1>
+    no quries
+       </h1>
+    {% endif %}
+        </tbody>
+    </table>
+</div>
+
+
+
+    {% elif a_reply %}
+      <div style="width:600px; margin:40px auto; background:#fff; padding:20px; border-radius:6px; box-shadow:0 0 10px #ccc;">
+
+    <h2 style="text-align:center; margin-bottom:20px;">Admin Reply Panel</h2>
+      {% if messages %}
+  <div class="message-wrapper">
+    {% for i in messages %}
+      <div class="alert alert-{{ i.tags }} alert-dismissible fade show custom-alert"
+           role="alert">
+        <span class="alert-icon">
+          {% if i.tags == 'success' %}
+            ✔
+          {% elif i.tags == 'error' %}
+            ✖
+          {% elif i.tags == 'warning' %}
+            ⚠
+          {% else %}
+            ℹ
+          {% endif %}
+        </span>
+
+        <span class="alert-text">{{ i }}</span>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+    <form method="post"  action="{% url 'reply_query' pk=qdata.id %}">
+    {% csrf_token %}
+        <!-- Name -->
+        <label>Name</label>
+        <input type="text" name="name" value="{{qdata.Name}}" 
+        style="width:100%; padding:8px; margin:6px 0 12px; border:1px solid #ccc; border-radius:4px;" 
+         readonly>
+
+        <!-- Email -->
+        <label>Email</label>
+        
+        <input type="email" name="email" value="{{qdata.Email}}" 
+        style="width:100%; padding:8px; margin:6px 0 12px; border:1px solid #ccc; border-radius:4px;"
+         readonly>
+
+        <!-- Query -->
+        <label>User Query</label>
+        <textarea rows="3" name="query" readonly
+        style="width:100%; padding:8px; margin:6px 0 12px; border:1px solid #ccc; border-radius:4px;">{{qdata.Query}}</textarea>
+
+        <!-- Department -->
+        <label>Department</label>
+        <input type="text" name="department" 
+        style="width:100%; padding:8px; margin:6px 0 12px; border:1px solid #ccc; border-radius:4px;"
+        value="{{qdata.department}}" readonly>
+
+        <!-- Status -->
+        <label>Status</label>
+        <select name="status"
+        style="width:100%; padding:8px; margin:6px 0 12px; border:1px solid #ccc; border-radius:4px;">
+            <option value={{qdata.status}}>{{qdata.status}}</option>
+        </select>
+
+        <!-- Admin Reply -->
+        <label>Admin Reply</label>
+        <textarea name="admin_reply" rows="4" required
+        style="width:100%; padding:8px; margin:6px 0 16px; border:1px solid #ccc; border-radius:4px;"
+        placeholder="Type admin reply here..."></textarea>
+
+        <!-- Button -->
+        <button type="submit"
+        style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:4px; font-size:16px; cursor:pointer;">
+        Send Reply
+        </button>
+    </form>
+
+</div>
+
+
+{% else %}
+<div style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <h2 style="color: var(--text-dark); margin: 0;">Admin Dashboard</h2>
+        <p style="color: #64748b; margin: 5px 0 0 0;">Logged in as: <b>{{ data.email }}</b></p>
+    </div>
+</div>
+
+<div class="info-grid">
+    <div class="info-card">
+        <div class="info-data">
+            <p>Total Employees</p>
+            <h1>{{all_emp.count|default:'0'}}</h1>
+        </div>
+        <div class="info-icon-large"><span class="material-icons-outlined">badge</span></div>
+    </div>
+    <div class="info-card">
+        <div class="info-data">
+            <p>Total Departments</p>
+            <h1>{{deptdata.count|default:'0'}}</h1>
+        </div>
+        <div class="info-icon-large" style="background: #fff7ed; color: #f59e0b;"><span
+                class="material-icons-outlined">account_tree</span></div>
+    </div>
+    <div class="info-card">
+        <div class="info-data">
+            <p>On Leave Today</p>
+            <h1>08</h1>
+        </div>
+        <div class="info-icon-large" style="background: #fef2f2; color: #ef4444;"><span
+                class="material-icons-outlined">event_busy</span></div>
+    </div>
+    <div class="info-card">
+        <div class="info-data">
+            <p>Pending Tasks</p>
+            <h1>15</h1>
+        </div>
+        <div class="info-icon-large" style="background: #ecfdf5; color: #10b981;"><span
+                class="material-icons-outlined">pending_actions</span></div>
+    </div>
+</div>
+{% endif %}
+
+</main>
+</div>
+
+{% endblock content %}
+ 
+{% block js %}
+
+ 
+ <script>
+    setTimeout(function() {
+        var msg = document.querySelector('.message-wrapper');
+        if (msg) {
+            msg.style.display = 'none';
+        }
+    }, 2000);
+</script>
+ 
+{% endblock js %}

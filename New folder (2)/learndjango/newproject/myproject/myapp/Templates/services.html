@@ -1,0 +1,219 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>landing</title>
+{% endblock title %}
+
+{% block css %}
+ <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        /* Top Blue Banner */
+        .promo-banner {
+            background-color: #0067b8;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+        }
+        .promo-banner a { color: white; font-weight: bold; margin-left: 5px; }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 10%;
+            background-color: #f2f2f2; /* Light grey background like image */
+            min-height: 80vh;
+        }
+
+        .content { max-width: 500px; }
+
+        .content h1 {
+            font-size: 48px;
+            font-weight: 600;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #262626;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .btn-group { display: flex; gap: 10px; }
+
+        .btn-blue {
+            background-color: #0067b8;
+            color: white;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #0067b8;
+            border: 2px solid #0067b8;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        /* Image Side */
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            /* In a real site, you'd use the laptop image here */
+        }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .btn-group { justify-content: center; }
+        }
+    </style>
+{% endblock css %}
+{% block content %}
+ 
+
+    <div class="promo-banner">
+        College and university students save 50% on Microsoft 365 Personal. <a href="#">Buy now ></a>
+    </div>
+
+    <section class="hero">
+        <div class="content">
+            <h1>Office is now <br> Microsoft 365</h1>
+            <p>Find the right plan for you</p>
+            <div class="btn-group">
+                <a href="#" class="btn-blue">Sign up for free</a>
+                <a href="#" class="btn-outline">Get Microsoft 365 ⌄</a>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x400?text=Laptop+Image+Placeholder" alt="Microsoft 365 on Laptop">
+        </div>
+    </section>
+ 
+
+ <br>
+ <br>
+
+ <section style="padding: 60px 10%; background-color: #ffffff; text-align: center;">
+    
+    <h2 style="font-size: 32px; color: #262626; margin-bottom: 10px;">Your productivity cloud across work and life</h2>
+    <a href="#" style="color: #0067b8; text-decoration: none; font-size: 16px; font-weight: 500;">Learn what this means for you. ></a>
+
+    <div style="display: flex; justify-content: center; gap: 30px; margin: 40px 0;">
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/color/48/microsoft-word-2019.png" alt="Word" style="display: block; margin: 0 auto 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">Word</a>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/color/48/microsoft-excel-2019.png" alt="Excel" style="display: block; margin: 0 auto 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">Excel</a>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/color/48/microsoft-powerpoint-2019.png" alt="PPT" style="display: block; margin: 0 auto 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">PowerPoint</a>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/color/48/microsoft-outlook-2019.png" alt="Outlook" style="display: block; margin: 0 auto 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">Outlook</a>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/color/48/microsoft-teams.png" alt="Teams" style="display: block; margin: 0 auto 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">Teams</a>
+        </div>
+        <div style="align-self: flex-end; padding-bottom: 5px;">
+            <a href="#" style="color: #0067b8; font-size: 14px; text-decoration: underline;">See more apps</a>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 20px; text-align: left;">
+        
+        <div style="flex: 1;">
+            <img src="https://via.placeholder.com/400x250" alt="Individual" style="width: 100%; height: auto; display: block;">
+            <h3 style="margin-top: 20px; font-size: 22px;">For individuals</h3>
+            <p style="color: #616161; margin: 10px 0 20px;">Powerful productivity apps for individuals and families.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">Learn more ></a>
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">See plans and pricing ></a>
+            </div>
+        </div>
+
+        <div style="flex: 1;">
+            <img src="https://via.placeholder.com/400x250" alt="Business" style="width: 100%; height: auto; display: block;">
+            <h3 style="margin-top: 20px; font-size: 22px;">For business</h3>
+            <p style="color: #616161; margin: 10px 0 20px;">Productivity solutions for small and medium-sized businesses.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">Learn more ></a>
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">See plans and pricing ></a>
+            </div>
+        </div>
+
+        <div style="flex: 1;">
+            <img src="https://via.placeholder.com/400x250" alt="Enterprise" style="width: 100%; height: auto; display: block;">
+            <h3 style="margin-top: 20px; font-size: 22px;">For enterprise</h3>
+            <p style="color: #616161; margin: 10px 0 20px;">Enterprise-grade productivity, management, and security.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">Learn more ></a>
+                <a href="#" style="color: #0067b8; font-weight: 600; text-decoration: none;">See plans and pricing ></a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<br>
+<br>
+
+
+  
+<hr style="border: none; border-top: 1px solid #ddd; margin: 40px 5%;">
+
+<section style="padding: 40px 5%; text-align: center; font-family: 'Segoe UI', sans-serif;">
+    <h2 style="font-size: 28px; font-weight: 600; margin-bottom: 40px;">Learn more about Microsoft 365</h2>
+    
+    <div style="display: flex; justify-content: center; gap: 80px; margin-bottom: 60px; flex-wrap: wrap;">
+        <div style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 10px;">🏠</div>
+            <p style="font-weight: 600; margin-bottom: 10px;">For individuals</p>
+            <a href="#" style="color: #0067b8; text-decoration: none; font-size: 14px;">Learn more ></a>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 10px;">🏢</div>
+            <p style="font-weight: 600; margin-bottom: 10px;">Business</p>
+            <a href="#" style="color: #0067b8; text-decoration: none; font-size: 14px;">Learn more ></a>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 10px;">🏛️</div>
+            <p style="font-weight: 600; margin-bottom: 10px;">Enterprise</p>
+            <a href="#" style="color: #0067b8; text-decoration: none; font-size: 14px;">Learn more ></a>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
+            <p style="font-weight: 600; margin-bottom: 10px;">Education</p>
+            <a href="#" style="color: #0067b8; text-decoration: none; font-size: 14px;">Learn more ></a>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: flex-start; gap: 20px; padding-top: 20px;">
+        <span style="font-size: 14px; color: #616161;">Follow Microsoft 365</span>
+        <img src="https://img.icons8.com/ios-filled/24/linkedin.png" style="cursor:pointer; width: 20px;">
+        <img src="https://img.icons8.com/ios-filled/24/twitterx.png" style="cursor:pointer; width: 20px;">
+        <img src="https://img.icons8.com/ios-filled/24/youtube-play.png" style="cursor:pointer; width: 20px;">
+        <img src="https://img.icons8.com/ios-filled/24/instagram-new.png" style="cursor:pointer; width: 20px;">
+        <img src="https://img.icons8.com/ios-filled/24/tiktok.png" style="cursor:pointer; width: 20px;">
+    </div>
+</section>
+{% endblock content %}

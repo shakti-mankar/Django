@@ -1,0 +1,400 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}
+    <title>try csploip</title>
+{% endblock title %}
+
+{% block css %}
+   <style>
+        /* RESET & BASE STYLES */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            color: #242424; 
+            line-height: 1.5;
+            background-color: #ffffff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { color: #0067b8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(105deg, #515ada 0%, #22c1c3 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 { font-size: 40px; font-weight: 500; margin-bottom: 20px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; }
+        .signin-btn {
+            border: 1px solid white;
+            padding: 4px 12px;
+            color: white;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .search-box {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 5px 15px;
+            border-radius: 2px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .search-box input {
+            width: 100%;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* PRODUCT ICONS */
+        .product-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+        .product-item { text-align: center; cursor: pointer; width: 100px; }
+        .product-item img { width: 40px; height: 40px; margin-bottom: 10px; }
+        .product-item p { font-size: 13px; color: #242424; }
+
+        /* TRENDING TOPICS GRID */
+        .trending-section { padding: 60px 0; }
+        .trending-section h2 { text-align: center; font-size: 32px; margin-bottom: 40px; }
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .topic-col h3 { font-size: 18px; margin-bottom: 20px; color: #242424; }
+        .topic-col ul { list-style: none; }
+        .topic-col li { margin-bottom: 15px; font-size: 14px; }
+
+        /* VIDEO SUCCESS STORIES (Image 3) */
+        .success-stories { background-color: #f2f2f2; padding: 60px 0; }
+        .success-stories h2 { text-align: center; margin-bottom: 40px; }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .video-card { background: white; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .video-card:hover { border-bottom: 3px solid #0067b8; }
+        .thumbnail { 
+            width: 100%; aspect-ratio: 1/1; 
+            background: #ddd; position: relative;
+            background-size: cover;
+        }
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.9); width: 40px; height: 40px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        }
+        .video-info { padding: 20px; font-size: 13px; }
+
+
+    .explore-section { padding: 60px 20px; background-color: #f2f2f2; }
+    .section-title { text-align: center; font-size: 32px; margin-bottom: 40px; font-weight: 400; }
+
+    /* Top Grid */
+    .explore-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+    .explore-card { display: flex; align-items: flex-start; gap: 20px; }
+    .explore-card img { width: 220px; border-radius: 4px; }
+    .explore-content h3 { font-size: 18px; margin-bottom: 12px; font-weight: 600; }
+    .explore-content p { font-size: 14px; margin-bottom: 15px; color: #444; }
+
+    /* Bottom Feature */
+    .feature-banner { 
+        background: white; 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        align-items: center;
+        padding: 40px;
+    }
+    .feature-img img { width: 100%; max-width: 450px; }
+    .feature-text h2 { font-size: 36px; margin-bottom: 20px; font-weight: 500; }
+    .feature-text p { font-size: 16px; margin-bottom: 20px; color: #444; }
+
+    /* Links & Buttons */
+    .arrow-link { font-size: 12px; font-weight: bold; color: #0067b8; text-transform: uppercase; letter-spacing: 0.5px; }
+    .get-m365-btn {
+        background-color: #0067b8;
+        color: white;
+        padding: 10px 25px;
+        font-weight: bold;
+        display: inline-block;
+        font-size: 14px;
+    }
+    .get-m365-btn:hover { text-decoration: none; background-color: #005da6; }
+
+
+    /* Base Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+            color: #242424; 
+            background-color: #ffffff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Explore Section (Image 1) */
+        .explore-section { background-color: #f2f2f2; padding: 40px 0 60px 0; }
+        .explore-title { text-align: center; font-size: 32px; margin-bottom: 40px; font-weight: 500; }
+        
+        .explore-top-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; }
+        .explore-card { display: flex; gap: 20px; align-items: flex-start; }
+        .explore-card img { width: 220px; height: auto; border-radius: 2px; }
+        .explore-card-content h3 { font-size: 18px; margin-bottom: 12px; font-weight: 600; }
+        .explore-card-content p { font-size: 14px; margin-bottom: 15px; line-height: 1.4; }
+        .explore-link { font-size: 12px; color: #0067b8; font-weight: bold; text-decoration: none; text-transform: uppercase; }
+        
+        /* Enhanced Personal Productivity Banner */
+        .ai-banner { background: white; display: flex; align-items: center; padding: 40px; }
+        .ai-banner-img { flex: 1; text-align: center; }
+        .ai-banner-img img { max-width: 100%; height: auto; }
+        .ai-banner-text { flex: 1; padding-left: 20px; }
+        .ai-banner-text h2 { font-size: 36px; margin-bottom: 20px; font-weight: 500; }
+        .ai-banner-text p { font-size: 16px; margin-bottom: 20px; }
+        .get-btn { 
+            display: inline-block; background-color: #0067b8; color: white; 
+            padding: 10px 24px; font-weight: bold; text-decoration: none; font-size: 14px;
+        }
+
+        /* Success Stories Section (Image 2/3) */
+        .success-section { padding: 60px 0; }
+        .success-title { text-align: center; font-size: 28px; margin-bottom: 40px; font-weight: 500; }
+        
+        .video-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+        .video-card { background: white; cursor: pointer; border-bottom: 4px solid transparent; transition: 0.2s; }
+        .video-card:hover { border-bottom: 4px solid #0067b8; }
+        
+        .thumb-container { position: relative; width: 100%; aspect-ratio: 1/1; background-color: #f0f0f0; }
+        .thumb-container img { width: 100%; height: 100%; object-fit: cover; }
+        .play-icon { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.9); width: 45px; height: 45px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 18px;
+        }
+        
+        .video-info { padding: 15px 5px; }
+        .video-info p { font-size: 13px; line-height: 1.4; margin-bottom: 10px; }
+        .duration { font-size: 11px; color: #666; }
+
+        /* More Support Options Footer */
+        .support-options { padding: 60px 0; border-top: 1px solid #e6e6e6; }
+        .support-options h2 { text-align: center; font-size: 36px; margin-bottom: 40px; font-weight: 500; }
+        .support-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .support-col h4 { font-size: 18px; margin-bottom: 20px; font-weight: 600; }
+        .support-col a { display: block; font-size: 13px; color: #0067b8; text-decoration: none; margin-bottom: 10px; }
+        .support-col a:hover { text-decoration: underline; }
+
+    </style>
+ 
+{% endblock css %}
+{% block content %}
+
+ 
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Microsoft Support</h1>
+            <p>Please sign in so we may serve you better <a href="#" class="signin-btn">Sign in</a></p>
+            <div class="search-box">
+                <input type="text" placeholder="How can we help you?">
+                <span style="color: #0067b8; font-weight: bold; cursor: pointer;">→</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <nav class="product-nav">
+            <div class="product-item">
+                <img src="https://img.icons8.com/color/48/microsoft-365.png" alt="M365">
+                <p>Microsoft 365</p>
+            </div>
+            <div class="product-item">
+                <img src="https://img.icons8.com/color/48/outlook.png" alt="Outlook">
+                <p>Outlook</p>
+            </div>
+            <div class="product-item">
+                <img src="https://img.icons8.com/color/48/onedrive.png" alt="OneDrive">
+                <p>OneDrive</p>
+            </div>
+            <div class="product-item">
+                <img src="https://img.icons8.com/color/48/windows-10.png" alt="Windows">
+                <p>Windows</p>
+            </div>
+            <div class="product-item">
+                <img src="https://img.icons8.com/color/48/microsoft-copilot.png" alt="Copilot">
+                <p>Microsoft Copilot</p>
+            </div>
+        </nav>
+        <p style="text-align: center; font-size: 12px; color: #0067b8; font-weight: bold; cursor: pointer;">MORE MICROSOFT PRODUCTS ></p>
+    </div>
+
+    <section class="trending-section container">
+        <h2>Trending topics</h2>
+        <div class="topics-grid">
+            <div class="topic-col">
+                <h3>Microsoft 365</h3>
+                <ul>
+                    <li><a href="#">Install Microsoft 365</a></li>
+                    <li><a href="#">Sign in to Microsoft 365</a></li>
+                    <li><a href="#">Manage payment and billing</a></li>
+                </ul>
+            </div>
+            <div class="topic-col">
+                <h3>Microsoft account & storage</h3>
+                <ul>
+                    <li><a href="#">How to sign in to your Microsoft account</a></li>
+                    <li><a href="#">Change your Microsoft account password</a></li>
+                    <li><a href="#">How does Microsoft storage work?</a></li>
+                </ul>
+            </div>
+            <div class="topic-col">
+                <h3>Activation</h3>
+                <ul>
+                    <li><a href="#">Activate Office</a></li>
+                    <li><a href="#">Activate Windows</a></li>
+                    <li><a href="#">Find your Windows product key</a></li>
+                </ul>
+            </div>
+            <div class="topic-col">
+                <h3>Windows & devices</h3>
+                <ul>
+                    <li><a href="#">Windows 11 system requirements</a></li>
+                    <li><a href="#">Windows 10 end of support</a></li>
+                    <li><a href="#">Find your hardware warranty</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+ 
+
+
+
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+<section class="explore-section">
+        <div class="container">
+            <h2 class="explore-title">Explore</h2>
+            <div class="explore-top-grid">
+                <div class="explore-card">
+                    <img src="https://via.placeholder.com/220x150" alt="Copilot">
+                    <div class="explore-card-content">
+                        <h3>Your AI-first productivity app for work and home</h3>
+                        <p>Ask, create, and draft with Copilot, plus your favorite apps and content in one place.</p>
+                        <a href="#" class="explore-link">Discover what you can do with Microsoft 365 Copilot app ></a>
+                    </div>
+                </div>
+                <div class="explore-card">
+                    <img src="https://via.placeholder.com/220x150" alt="Small Business">
+                    <div class="explore-card-content">
+                        <h3>If you're a small business owner</h3>
+                        <p>Find the information you need to build, run, and grow your small business with Microsoft 365.</p>
+                        <a href="#" class="explore-link">Visit small business help and learning ></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-banner">
+                <div class="ai-banner-img">
+                    <img src="https://via.placeholder.com/400x250" alt="Microsoft 365">
+                </div>
+                <div class="ai-banner-text">
+                    <h2>Enhance your personal productivity with AI</h2>
+                    <p>Copilot in Microsoft 365 now helps you do more with the apps you use every day.</p>
+                    <a href="#" class="explore-link" style="display:block; margin-bottom:20px;">Find more about your new AI-powered productivity suite ></a>
+                    <a href="#" class="get-btn">GET MICROSOFT 365 ></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-section container">
+        <h2 class="success-title">Microsoft 365 small business success stories</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="thumb-container">
+                    <img src="https://via.placeholder.com/300" alt="Story 1">
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="video-info">
+                    <p>Explore how Microsoft 365 empowers an artist collective.</p>
+                    <div class="duration">Duration: 1 minute 48 seconds</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="thumb-container">
+                    <img src="https://via.placeholder.com/300" alt="Story 2">
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="video-info">
+                    <p>Discover how a restaurant group operates like a corporation.</p>
+                    <div class="duration">Duration: 2 minutes</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="thumb-container">
+                    <img src="https://via.placeholder.com/300" alt="Story 3">
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="video-info">
+                    <p>Watch Mighty Media scale creativity with Microsoft 365 Copilot.</p>
+                    <div class="duration">Duration: 2 minutes 1 second</div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="thumb-container">
+                    <img src="https://via.placeholder.com/300" alt="Story 4">
+                    <div class="play-icon">▶</div>
+                </div>
+                <div class="video-info">
+                    <p>See how Mighty Media drives efficiency in video production.</p>
+                    <div class="duration">Duration: 1 minute 37 seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-options container">
+        <h2>More support options</h2>
+        <div class="support-grid">
+            <div class="support-col">
+                <h4>Contact Support</h4>
+                <a href="#">Contact us</a>
+            </div>
+            <div class="support-col">
+                <h4>Enterprise support</h4>
+                <a href="#">Support for business</a>
+            </div>
+            <div class="support-col">
+                <h4>Privacy & Security</h4>
+                <a href="#">Security</a>
+            </div>
+            <div class="support-col">
+                <h4>More support</h4>
+                <a href="#">Accessibility</a>
+            </div>
+        </div>
+    </section>
+   
+
+{% endblock content %}

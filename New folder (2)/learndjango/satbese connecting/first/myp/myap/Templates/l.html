@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="{% url 'formdata' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="name">name
+    </label>
+    <input type="text" name="name" value="" placeholder="enter your name :" >
+    <label for="email">email</label>
+    <input type="email" name="email" value=""placeholder="enetr your email : "required>
+    <label for="files">pics</label>
+    <input type="file" name="files" value="" placeholder="enter your files : ">
+
+    <h1>gender </h1>
+    <label for="gender">
+        <input type="radio" name="gender" value="male" required>
+        male
+    </label>
+        <label for="gender">
+        <input type="radio" name="gender" value="female">
+        female
+    </label>
+        <label for="gender">
+        <input type="radio" name="gender" value="others">
+        others
+    </label>
+
+    <h1>select your course</h1>
+
+    <label for="">
+        <input type="checkbox" name="courses" value="html" required>
+        html
+    </label>
+
+        <label for="">
+        <input type="checkbox" name="courses" value="css" required>
+        css
+    </label>
+
+        <label for="">
+        <input type="checkbox" name="courses" value="js" required>
+        js
+    </label>
+    <input type="submit" value="submit">
+
+    <h1>select your city</h1>
+
+<select name="city[]" required>
+    <option value="">---select-----</option>
+    <option value="bhopal">bhopal</option>
+    <option value="bhopal">delhi</option>
+    <option value="bhopal">mumbai</option>
+
+
+</select>
+
+
+
+</form>
+    
+</body>
+</html>
