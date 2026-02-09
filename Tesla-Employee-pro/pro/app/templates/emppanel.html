@@ -363,8 +363,8 @@ Admin Dashboard
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <p><b>Email:</b> {{ data.email }}</p>
                 <p><b>Mobile:</b> {{ data.mobile }}</p>
-                <p><b>DOB:</b> {{ data.DOB }}</p>
-                <p><b>Gender:</b> {{ data.gender|title }}</p>
+                <p><b>DOB:</b> {{ data.dob }}</p>
+                <p><b>Gender:</b> {{ data.gender }}</p>
             </div>
         </div>
 
@@ -428,7 +428,7 @@ Admin Dashboard
                     {% endif %}
                     </select>
                 </div>
-                <button type="submit" class="btn-primary">Submit Query</button>
+                <button type="submit" class="btn-primary" style="background-color: #0ea5e9;" >Submit Query</button>
 
             </form>
         </div>
@@ -558,7 +558,7 @@ Admin Dashboard
         <button type="button"
                 class="btn-close"
                 data-bs-dismiss="alert"
-                aria-label="Close">
+                aria-label="Close" style="background-color: #38bdf8;" >
         </button>
       </div>
     {% endfor %}
@@ -595,7 +595,7 @@ Admin Dashboard
                     <label>status</label>
                     <input type="text" name="status" value={{Edit.status}} readonly placeholder="e.g. Salary Issue, Hardware Repair" required>
                 </div>
-                <button type="submit" class="btn-primary">Submit Query</button>
+                <button type="submit" class="btn-primary" style="background-color: #38bdf8;" >Submit Query</button>
 
  
             </form>
@@ -681,9 +681,9 @@ Admin Dashboard
             background:#ffffff;
             padding:22px 24px;
             border-radius:16px;
-            display:flex;
+            
             justify-content:space-between;
-            align-items:center;
+            align-items:;
             box-shadow:0 8px 20px rgba(0,0,0,0.04);
             min-height:110px;
         ">
@@ -699,11 +699,11 @@ Admin Dashboard
                 font-size:42px;
                 line-height:1;
                 color:#6366f1;
-                display:flex;
+                
                 align-items:center;
                 justify-content:center;
             ">
-                help_center
+                
             </span>
         </div>
 
@@ -712,7 +712,7 @@ Admin Dashboard
             background:#ffffff;
             padding:22px 24px;
             border-radius:16px;
-            display:flex;
+            
             justify-content:space-between;
             align-items:center;
             box-shadow:0 8px 20px rgba(0,0,0,0.04);
@@ -730,11 +730,11 @@ Admin Dashboard
                 font-size:42px;
                 line-height:1;
                 color:#f59e0b;
-                display:flex;
+                
                 align-items:center;
                 justify-content:center;
             ">
-                assignment
+                
             </span>
         </div>
 
@@ -743,7 +743,7 @@ Admin Dashboard
             background:#ffffff;
             padding:22px 24px;
             border-radius:16px;
-            display:flex;
+            
             justify-content:space-between;
             align-items:center;
             box-shadow:0 8px 20px rgba(0,0,0,0.04);
@@ -761,11 +761,11 @@ Admin Dashboard
                 font-size:42px;
                 line-height:1;
                 color:#f59e0b;
-                display:flex;
+                
                 align-items:center;
                 justify-content:center;
             ">
-                assignment
+                
             </span>
         </div>
 
@@ -774,7 +774,7 @@ Admin Dashboard
             background:#ffffff;
             padding:22px 24px;
             border-radius:16px;
-            display:flex;
+        
             justify-content:space-between;
             align-items:center;
             box-shadow:0 8px 20px rgba(0,0,0,0.04);
@@ -792,11 +792,11 @@ Admin Dashboard
                 font-size:42px;
                 line-height:1;
                 color:#22c55e;
-                display:flex;
+        
                 align-items:center;
                 justify-content:center;
             ">
-                verified
+                
             </span>
         </div>
 
