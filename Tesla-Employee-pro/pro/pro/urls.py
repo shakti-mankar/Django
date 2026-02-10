@@ -34,7 +34,7 @@ urlpatterns = [
     path('remove_department/', views.remove_department,name='remove_department'),
     path('all_employee/', views.all_employee,name='all_employee'),
     path('all_department/', views.all_department,name='all_department'),
-    path('all_queries/', views.all_queries,name='all_queries'),
+    path('allquries/', views.all_quries,name='all_quries'),
     path('addemp/',views.addemp,name='addemp'),
     path('save_department/',views.save_department,name='save_department'),
     path("removeemp/<int:pk>/",views.removeemp,name="removeemp"),
@@ -69,6 +69,10 @@ urlpatterns = [
     path("emppanel/Del/<int:pk>/",views.Del,name="Del"),
     path("removedept/<int:pk>/",views.removedept,name="removedept"),
     path("removeemp/<int:pk>/",views.removeemp,name="removeemp"),
+    path("search/",views.search,name='search'),
+    path("search1/",views.search1,name='search1'),
+
+
 
 
 

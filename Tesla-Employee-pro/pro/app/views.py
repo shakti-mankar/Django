@@ -295,9 +295,21 @@ def  all_employee(req):
 
 
 
-def all_queries(req):
+def all_quries(req):
+    if 'admin_e' in req.session and 'admin_p' in req.session:
+          a_data = {
+            'email': req.session['admin_e'],
+            'password': req.session['admin_p'],
+            'name': req.session['admin_n']
+        }
+          qdata=query.objects.all()
+          return render(req,'admindash.html', {'data': a_data,'qdata':qdata,"all_quries":True})
+    else:
+        msg={'msg':'login first'}
+        return render(req,"login.html",{'msg':msg})
 
-    return render(req,'admindash.html',{'all_queries': True})
+
+
 
 
 
@@ -506,7 +518,7 @@ def a_reply(req,pk):
             'name': req.session['admin_n']
         }
         qdata=query.objects.get(id=pk)
-        return render(req, 'admindpanel.html', {'data': a_data,'qdata':qdata,'a_reply':True})   
+        return render(req, 'admindash.html', {'data': a_data,'qdata':qdata,'a_reply':True})   
     else:
         return redirect('login')
     
@@ -631,6 +643,60 @@ def Del(req,pk):
         return redirect('login')
 
 
+
+# SEARCH
+
+@never_cache
+def search(req):
+    if 'admin_e' in req.session and 'admin_p' in req.session:
+        a_data = {
+            'email': req.session['admin_e'],
+            'password': req.session['admin_p'],
+            'name': req.session['admin_n']
+        }
+
+        search = req.sesison.get('search')
+
+
+        deptdata = dep.objects.filter(
+            dept_head_contains=search,
+            dept_name_contains=search,
+        )
+
+        return render(req,'search')
+    
+    else:
+        returnredirect('login')
+
+
+
+
+@never_cache
+def search1(req):
+    if 'admin_e' in req.session and 'admin_p' in req.session:
+        a_data = {
+            'email': req.session['admin_e'],
+            'password': req.session['admin_p'],
+            'name': req.session['admin_n']
+        }
+
+        if req.method =='POST':
+
+            search=req.POST.get['search']
+            req.session['search'] = search
+
+            return redirect('search')
+        
+        else:
+            return redirect('admindash1')
+        
+    else:
+        return redirect('login')
+         
+
+          
+
+    
 
 
 

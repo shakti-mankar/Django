@@ -405,6 +405,12 @@ tbody tr:last-child{
 }
 
 
+/* search button css  */
+
+.content-table thead tr {
+    gap: 20px;
+}
+
 
 
 </style>
@@ -428,14 +434,14 @@ tbody tr:last-child{
         <a class="menu-item danger" href={% url 'remove_department' %} >Remove Department</a>
         <a class="menu-item" href={% url 'all_employee' %} >All Employees</a>
         <a class="menu-item" href={% url 'all_department' %} >All Departments</a>
-        <a class="menu-item" href={% url 'all_queries' %} >All Queries</a>
+        <a class="menu-item" href={% url 'all_quries' %} >All Queries</a>
 
         <!-- <button class="logout">Logout</button> -->
     </aside>
 
        <!-- Main Content -->
     <main class="content">
-        <a href="#" class="back">← Back to Dashboard</a>
+        <a href="{% url 'admin_dashcard' %}" class="back">← Back to Dashboard</a>
 
         <h1>Welcome Admin</h1>
         <p class="email">Logged in as: admin@gmail.com</p>
@@ -455,12 +461,12 @@ tbody tr:last-child{
 
         <div class="card">
             <p>Total Employees</p>
-            <h2>3</h2>
+            <h2>{{all_emp.count|default:'0'}}</h2>
         </div>
 
         <div class="card">
-            <p>Total Departments</p>
-            <h2>6</h2>
+            <p>Total Department</p>
+            <h2>{{deptdata.count|default:'0'}}</h2>
         </div>
 
         <div class="card">
@@ -978,6 +984,17 @@ tbody tr:last-child{
     <table class="content-table">
         <h2 style="background-color: paleturquoise;" >All Departments</h2>
         <thead>
+
+            <tr class="search"  >
+
+            <!-- <input type="text" >  -->
+            <input type="text" placeholder="Search Department name" >
+            <input type="text" placeholder="Search HOD" >
+            <input type="text" placeholder="Search department Code" >
+            <button>SEARCH</button>
+            </tr>
+
+
             <tr>
                 <th>s no</th>
                 <th>Dept Name</th>
@@ -1047,7 +1064,7 @@ tbody tr:last-child{
 </div> -->
 
 
-{% elif all_queries %}
+{% elif all_quries %}
 
 <div class="form-card" style="max-width: 100%;">
     <h2>All Quries</h2>
