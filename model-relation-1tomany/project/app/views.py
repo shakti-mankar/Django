@@ -9,7 +9,7 @@ def landing(req):
     
 
 def forward_access(req):
-    #First method
+    #First method :- wihtout related name 
     data = Employee.objects.all()
     # print(data.query)
 
@@ -18,15 +18,26 @@ def forward_access(req):
               i.city,
               i.mobile,
               i.email,
-              course,
+              i.course,
               i.dep_data.d_disc)
         
 
-    return render(req,'landing.html', 
-                  {'data':data},
-                  "forward_access")
+    
+        return render(req,'landing.html', 
+                  {'data':data,
+                  'forward_access':True})
 
 
 
 def reverse_access(req):
-    return render(req,'landing.html')
+    #without related name 
+    data = Department.objects.all()
+    print(data.query)
+
+    for i in data:
+        print(i.d_name,
+              i.d_disc,
+              i.employee_set.all())
+    return render(req,'landing.html',{'data':data,'reverse_access':True})
+
+
