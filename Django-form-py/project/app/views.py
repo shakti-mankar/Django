@@ -19,3 +19,6 @@ def register(req):
     return render(req,'register.html', {'fm':xyz})
 
 
+def login(req):
+    return render(req,'login.html')
+
