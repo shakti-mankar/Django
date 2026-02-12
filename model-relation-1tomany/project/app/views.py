@@ -31,7 +31,7 @@ def forward_access(req):
 
 def reverse_access(req):
     #without related name 
-    data = Department.objects.all()
+    data = Department.objects.prefetch_related('employee_set')
     print(data.query)
 
     for i in data:
