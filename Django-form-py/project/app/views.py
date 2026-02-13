@@ -8,6 +8,9 @@ def register(req):
     if req.method=='POST':
         # print("Hello")
         x = StudentForm(req.POST)
+        # print(x.is_valid)
+        # print(x.errors)
+        print(dict(x.errors))
         if x.is_valid():
             print(x.cleaned_data)
             x.save()
@@ -15,10 +18,11 @@ def register(req):
 
         # print(x)
 
-    xyz = StudentForm()
-    return render(req,'register.html', {'fm':xyz})
+    else:
+        x = StudentForm()
+    return render(req,'register.html', {'fm':x})
 
 
 def login(req):
-    return render(req,'login.html')
+    return render(req,'register.html')
 

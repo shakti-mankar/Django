@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-4">
+
+    <h1 class="text-center mb-5">This is Landing Page</h1>
+
+    <!-- IMAGE -->
+    <div class="mb-5 text-center">
+        <h2 class="mb-3">Image</h2>
+        <img src="{% static 'img/c1.jpg' %}" 
+             class="img-fluid rounded shadow"
+             alt="Sample Image">
+    </div>
+
+    <!-- AUDIO -->
+    <div class="mb-5 text-center">
+        <h2 class="mb-3">Audio</h2>
+        <audio  class="w-100" controls
+             src="{% static 'audio/Back_to_friends.mp3' %}" >
+
+        </audio>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="mb-5 text-center">
+        <h2 class="mb-3">Video</h2>
+        <video class="w-100 rounded shadow"
+               style="height:50vh; object-fit:cover;"
+               autoplay
+               muted
+               loop
+               controls>
+            <source src="{% static 'video/vid1.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
