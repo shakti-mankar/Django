@@ -20,4 +20,7 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.landing,name='landing.html'),
+    path('upload_profile/',views.upload_profile,name='upload_profile'),
+    
 ]
