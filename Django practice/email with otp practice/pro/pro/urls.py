@@ -20,11 +20,9 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.landing,name='landing.html'),
-    path('forget',views.forget,name='forget'),
-    path('newpassword',views.newpassword,name='newpassword'),
-    path('otp',views.otp,name='otp'),
-    path('newpass',views.newpass,name='newpass')
-    
-    
+    path('',views.login,name='login.html'),
+    path('forget',views.forget,name='forget.html'),
+    path('otp',views.otp,name='otp.html'),
+    path('newpassword',views.newpassword,name='newpassword.html'),
+
 ]
