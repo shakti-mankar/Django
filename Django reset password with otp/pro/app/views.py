@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from .models import Employee 
+from .models import Employee  
 from django.core.mail import send_mail
 from django.contrib import messages
 import random

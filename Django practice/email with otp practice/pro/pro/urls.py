@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from app import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.login,name='login.html'),
-    path('forget',views.forget,name='forget.html'),
-    path('otp',views.otp,name='otp.html'),
-    path('newpassword',views.newpassword,name='newpassword.html'),
+    path('forget',views.forget,name='forget'),
+    path('otp',views.otp,name='otp'),
+    path('newpassword',views.newpassword,name='newpassword'),
+    path('newpass',views.newpass,name='newpass'),
 
 ]
