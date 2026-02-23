@@ -70,7 +70,8 @@ urlpatterns = [
     path("removedept/<int:pk>/",views.removedept,name="removedept"),
     path("removeemp/<int:pk>/",views.removeemp,name="removeemp"),
     path("search/",views.search,name='search'),
-    path("search1/",views.search1,name='search1'),
+    path("reset/",views.reset,name="reset"),
+
 
 
 

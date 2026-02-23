@@ -648,51 +648,23 @@ def Del(req,pk):
 
 @never_cache
 def search(req):
-    if 'admin_e' in req.session and 'admin_p' in req.session:
-        a_data = {
-            'email': req.session['admin_e'],
-            'password': req.session['admin_p'],
-            'name': req.session['admin_n']
-        }
-
-        search = req.sesison.get('search')
-
-
-        deptdata = dep.objects.filter(
-            dept_head_contains=search,
-            dept_name_contains=search,
-        )
-
-        return render(req,'search')
     
-    else:
-        returnredirect('login')
+    if req.method=='POST':
+            dept_name=req.POST.get('dept_name')
+            dept_head=req.POST.get('dept_head')
+            dept_code=req.POST.get('dept_code')
+            deptdata=dep.objects.filter(dept_name__contains=dept_name,dept_head__contains=dept_head,dept_code__contains=dept_code)
+            return render(req,'admindash.html', {"all_department":True,'deptdata':deptdata})
+    
+
+def reset(req):
+    deptdata=dep.objects.all()
+    return render(req,'admindash.html', {"all_department":True,'deptdata':deptdata})
+    
 
 
 
 
-@never_cache
-def search1(req):
-    if 'admin_e' in req.session and 'admin_p' in req.session:
-        a_data = {
-            'email': req.session['admin_e'],
-            'password': req.session['admin_p'],
-            'name': req.session['admin_n']
-        }
-
-        if req.method =='POST':
-
-            search=req.POST.get['search']
-            req.session['search'] = search
-
-            return redirect('search')
-        
-        else:
-            return redirect('admindash1')
-        
-    else:
-        return redirect('login')
-         
 
           
 

@@ -469,14 +469,14 @@ tbody tr:last-child{
             <h2>{{deptdata.count|default:'0'}}</h2>
         </div>
 
-        <div class="card">
+        <!-- <div class="card">
             <p>On Leave Today</p>
             <h2>08</h2>
-        </div>
+        </div> -->
 
         <div class="card">
             <p>Pending Tasks</p>
-            <h2>15</h2>
+            <h2> {{qdata.count|default:'0'}} </h2>
         </div>
     </div>
 
@@ -639,11 +639,13 @@ tbody tr:last-child{
 
                             <div class="row">
                                 <div class="field">
-                                    <label>Department Head (HOD)</label>
-                                    <select>
+                                    <label  >Department Head (HOD)</label>
+                                    <select name="dept_head" >
                                         <option>Select Manager</option>
                                         <option>John Doe</option>
                                         <option>Jane Smith</option>
+                                        <option>Arshad Saxena</option>
+                                        <option>Manish Sharma</option>
                                     </select>
                                 </div>
 
@@ -973,6 +975,16 @@ tbody tr:last-child{
 
 {% elif all_department %}
 
+ <form action="{% url 'search' %}" method="post">
+        {% csrf_token %}
+    <input type="search" name="dept_name" placeholder="deptname">
+    <input type="search" name="dept_head" placeholder="depthead">
+    <input type="search" name="dept_code" placeholder="deptcode">
+    <input type="submit" value="search">
+    </form>
+
+    <a href="{% url 'reset' %}">❌</a>
+
 
 <div class="form-card" style="max-width: 100%;">
 
@@ -981,18 +993,10 @@ tbody tr:last-child{
     {% if deptdata %}
     
  
+   
     <table class="content-table">
         <h2 style="background-color: paleturquoise;" >All Departments</h2>
         <thead>
-
-            <tr class="search"  >
-
-            <!-- <input type="text" >  -->
-            <input type="text" placeholder="Search Department name" >
-            <input type="text" placeholder="Search HOD" >
-            <input type="text" placeholder="Search department Code" >
-            <button>SEARCH</button>
-            </tr>
 
 
             <tr>
@@ -1009,7 +1013,7 @@ tbody tr:last-child{
              
                    <td>{{forloop.counter}}</td>
                     <td>{{i.dept_name}}</td>
-                    <td>{{i.dept_head.}}</td>
+                    <td>{{i.dept_head}}</td>
                     <td>{{i.dept_code}}</td>
 
             </tr>
