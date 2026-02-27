@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Appointment Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+<div class="container mt-5">
+
+ 
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">Doctor Appointment Form</h2>
+
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <h4 class="mb-3">Patient Details</h4>
+                        <p class="text-muted">
+                            Please fill the form below and we will get back soon to you.
+                            A confirmation email will be sent.
+                        </p>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text" name="address" class="form-control" required>
+                        </div>
+
+
+                                                <!-- contact -->
+                        <div class="mb-3">
+                            <label class="form-label">Contact</label>
+                            <input type="text" name="contact" class="form-control" required>
+                        </div>
+
+                        <!-- City -->
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <select name="city" class="form-select" name="city" required>
+                                <option selected disabled>Select City</option>
+                                <option value="Bhopal">Bhopal</option>
+                                <option value="Sehore">Sehore</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Guna">Guna</option>
+                                <option value="Vidisha">Vidisha</option>
+                            </select>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="mb-3">
+                            <label class="form-label">Appointment Date</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+
+                        <!-- Time -->
+                        <div class="mb-4">
+                            <label class="form-label">Appointment Time</label>
+                            <input type="time" name="time" class="form-control" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Book Appointment
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h1> Doctor appointment form  </h1>
+
+<div>
+
+    <form action="" method="post" >
+        {% csrf_token %}
+
+        <h1> Patient Details </h1>
+        <p> Please fill the form below and we will get back soon to you A confirmation email will be sent </p>
+
+        <label for="">Name</label>
+        <input type="text" name="name"> <br>
+
+         <label for="">Email</label>
+        <input type="text" name="email"> <br>
+
+         <label for="">Address </label>
+        <input type="text" name="Address"> <br>
+
+         <label for="">City</label>
+         <input type="text" name="" id="">
+        <select name="" id=""> Bhopal </select>
+        <option value="">Sehore</option>
+        <option value="">Indore</option>
+        <option value="">Guna</option>
+        <option value="">Vidisha</option>
+
+         <label for="">Name</label>
+        <input type="date"> <br> 
+
+        <label for="">Time</label>
+        <input type="time"> <br> 
+
+        <input type="submit">
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+</div>
+ -->
