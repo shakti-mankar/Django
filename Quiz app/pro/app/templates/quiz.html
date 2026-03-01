@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Quiz</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 8px;
+        }
+        button {
+            padding: 8px 15px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .score {
+            font-size: 20px;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+
+{% if not submitted %}
+
+    <h2>Basic Quiz</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for q in questions %}
+            <p><strong>{{ q.id }}. {{ q.question }}</strong></p>
+
+            {% for option in q.options %}
+                <input type="radio" name="question_{{ q.id }}" value="{{ option }}">
+                {{ option }} <br>
+            {% endfor %}
+            <br>
+        {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+
+{% else %}
+
+    <h2>Quiz Completed</h2>
+    <div class="score">
+        Your Score: {{ score }} / {{ questions|length }}
+    </div>
+    <br>
+
+    <form method="GET">
+        <button type="submit">Back to Quiz</button>
+    </form>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
