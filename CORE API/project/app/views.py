@@ -128,4 +128,7 @@ def detail(req,pk):
     else:
         d={'msg':'Given id is not present in our database'}
         j_data = json.dumps(d)
+        print(j_data)
         return HttpResponse(j_data,content_type='application/json')
+    
+    
