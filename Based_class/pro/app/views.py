@@ -41,6 +41,7 @@ class Stu_Detail(APIView):
 
     def put(self, request, pk, format=None):
         stu = self.get_object(pk)
+        print("stu")
         serializer = StudentSerializer(stu, data=request.data)
         if serializer.is_valid():
             serializer.save()
