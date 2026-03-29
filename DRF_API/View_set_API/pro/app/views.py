@@ -10,17 +10,26 @@ from rest_framework import status
 
 # Create your views here.
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for listing or retrieving users.
-    """
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     A simple ViewSet for listing or retrieving users.
+#     """
    
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializer
+
+
+# class OfficersViewset(viewsets.ModelViewSet):
+
+#     queryset = officers.objects.all()
+#     serializer_class = OfficersSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
 
 class OfficersViewset(viewsets.ModelViewSet):
-
     queryset = officers.objects.all()
     serializer_class = OfficersSerializer
-
