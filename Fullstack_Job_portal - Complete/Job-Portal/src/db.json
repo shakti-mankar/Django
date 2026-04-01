@@ -1,0 +1,59 @@
+{
+  "users": [
+    {
+      "name": "shakti",
+      "email": "mailshaktimankar@gmail.com",
+      "password": "123",
+      "role": "employer",
+      "id": "s8vr87XHyqM"
+    },
+    {
+      "name": "shakti",
+      "email": "mailshaktimankar@gmail.com",
+      "password": "123",
+      "role": "employer",
+      "id": "X5xPy3BeDSU"
+    },
+    {
+      "name": "sumit",
+      "email": "s@gmail.com",
+      "password": "123",
+      "role": "candidate",
+      "id": "iIZC-eXgf-8"
+    },
+    {
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "123",
+      "role": "employer",
+      "id": "f3Hpgz9bR0A"
+    },
+    {
+      "name": "emp",
+      "email": "emp@gmail.com",
+      "password": "123",
+      "role": "candidate",
+      "id": "AOOGZe3rD9I"
+    }
+  ],
+  "jobs": [
+    {
+      "company": "hr",
+      "post": "hr",
+      "id": "d8uLCGlmlu0"
+    }
+  ],
+  "applications": [
+    {
+      "name": "gerfebhdagrfbwe",
+      "email": "w@gmail.com",
+      "contact": "123456789",
+      "age": "21",
+      "resume": "wdefgse",
+      "company": "hr",
+      "post": "hr",
+      "id": "koMWePwojOc"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
