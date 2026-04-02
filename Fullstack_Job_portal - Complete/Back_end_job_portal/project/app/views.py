@@ -51,7 +51,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
     queryset = User.objects.all()
     # authentication_classes = [SessionAuthentication, BasicAuthentication] objectt lvel 
