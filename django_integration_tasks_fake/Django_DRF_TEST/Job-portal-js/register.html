@@ -1,0 +1,24 @@
+<input id="username">
+<input id="password">
+<select id="role">
+  <option value="employer">Employer</option>
+  <option value="candidate">Candidate</option>
+</select>
+
+<button onclick="register()">Register</button>
+
+<script>
+async function register() {
+  await fetch("http://127.0.0.1:8000/api/register/", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value,
+      role: role.value
+    })
+  });
+
+  alert("Registered");
+}
+</script>
