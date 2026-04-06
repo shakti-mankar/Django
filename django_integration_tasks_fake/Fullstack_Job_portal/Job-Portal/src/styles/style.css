@@ -1,0 +1,42 @@
+body {
+  font-family: Arial;
+  background: #f4f7fb;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background: #2563eb;
+  padding: 15px;
+  color: white;
+}
+
+.nav a {
+  color: white;
+  margin: 10px;
+}
+
+.form {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select {
+  margin: 5px;
+  padding: 10px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.card {
+  background: white;
+  padding: 10px;
+  margin: 10px;
+}
